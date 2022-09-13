@@ -1,19 +1,16 @@
-const express = require("express");
-const cors = require("cors");
-const dotenv = require("dotenv");
+const express = require("express")
+const { readdirSync } = require("fs")
+const cors = require("cors")
+const dotenv = require("dotenv")
 
-const app = express();
+const app = express()
+dotenv.config()
+app.use(cors())
 
-dotenv.config();
+readdirSync("./routes").map((f) => app.use("/", require("./routes/" + f)))
 
-app.use(cors());
-
-
-
-const port = process.env.PORT || 8000;
-
-console.log("first");
+const port = process.env.PORT || 8000
 
 app.listen(port, () => {
-  console.log(`Backend running on ${port}`);
-});
+  console.log(`Backend running on ${port}`)
+})
