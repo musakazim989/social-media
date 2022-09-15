@@ -9,6 +9,7 @@ dotenv.config()
 
 // middleware
 app.use(cors())
+app.use(express.json())
 
 // routes
 readdirSync("./routes").map((f) => app.use("/", require("./routes/" + f)))
@@ -23,4 +24,3 @@ const port = process.env.PORT || 8000
 app.listen(port, () => {
   console.log(`Backend running on ${port}`)
 })
- 

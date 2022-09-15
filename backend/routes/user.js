@@ -1,8 +1,8 @@
 const express = require("express")
-const { myuser } = require("../controllers/user")
+const { register } = require("../controllers/register")
 
 const router = express.Router()
 
-router.get("/user", myuser)
+router.get("/register", register)
 
 module.exports = router
