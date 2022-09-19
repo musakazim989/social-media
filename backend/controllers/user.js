@@ -1,4 +1,8 @@
-const { validationEmail, validateLength } = require("../helpers/validation.js")
+const {
+  validationEmail,
+  validateLength,
+  validateUsername,
+} = require("../helpers/validation.js")
 const bcrypt = require("bcrypt")
 const User = require("../models/User.js")
 
@@ -51,23 +55,28 @@ exports.register = async (req, res) => {
         .json({ message: "Password must be atleast 6 characters." })
     }
 
+    // password encryption
     const cryptedPassword = await bcrypt.hash(password, 12)
-    console.log(cryptedPassword)
 
-    return
+    // unique username generation
+    const tempUserName = first_name + last_name
+    const newuserName = await validateUsername(tempUserName)
+    console.log(newuserName)
+    console.log(cryptedPassword)
 
     const user = await new User({
       first_name,
       last_name,
       email,
-      password,
-      username,
+      password: cryptedPassword,
+      username: newuserName,
       bYear,
       bMonth,
       bDay,
       gender,
     }).save()
 
+    console.log(user)
     res.json(user)
   } catch (error) {
     res.status(500).json({ message: error.message })
