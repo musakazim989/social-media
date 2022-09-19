@@ -61,8 +61,6 @@ exports.register = async (req, res) => {
     // unique username generation
     const tempUserName = first_name + last_name
     const newuserName = await validateUsername(tempUserName)
-    console.log(newuserName)
-    console.log(cryptedPassword)
 
     const user = await new User({
       first_name,

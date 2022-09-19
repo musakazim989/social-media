@@ -2,7 +2,7 @@ const User = require("../models/User")
 
 exports.validationEmail = (email) => {
   return String(email)
-    .toLocaleLowerCase()
+    .toLowerCase()
     .match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
 }
 
