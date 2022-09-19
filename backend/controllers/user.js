@@ -29,7 +29,7 @@ exports.register = async (req, res) => {
     // user validation wheather user exist or not
     const check = await User.findOne({ email })
     if (check) {
-      res.status(400).json({
+      return res.status(400).json({
         message: "This email already exist, try different email to continue.",
       })
     }
